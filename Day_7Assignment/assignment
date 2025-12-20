@@ -1,0 +1,126 @@
+using System;
+
+// ================= DELEGATE =================
+public delegate int EvaluationDelegate(int marks);
+
+// ================= LEARNER (ENCAPSULATION) =================
+public class Learner
+{
+    public int LearnerId { get; private set; }
+    public string LearnerName { get; private set; }
+
+    private int totalMarks; // private as required
+
+    public Learner(int id, string name)
+    {
+        LearnerId = id;
+        LearnerName = name;
+    }
+
+    public void SetMarks(int marks)
+    {
+        if (marks >= 0 && marks <= 100)
+            totalMarks = marks;
+    }
+
+    public int GetMarks()
+    {
+        return totalMarks;
+    }
+}
+
+// ================= COURSE (BASE CLASS) =================
+public abstract class Course
+{
+    public string CourseName { get; set; }
+
+    // Event declaration
+    public event Action<string> EvaluationCompleted;
+
+    public void Evaluate(Learner learner, EvaluationDelegate evaluationLogic)
+    {
+        int evaluatedScore = evaluationLogic(learner.GetMarks());
+        learner.SetMarks(evaluatedScore);
+
+        bool isCertified = IssueCertificate(learner.GetMarks());
+
+        // Raise event
+        OnEvaluationCompleted(
+            isCertified
+                ? $"🎉 Certificate ISSUED to {learner.LearnerName} for {CourseName}"
+                : $"❌ Certificate FAILED for {learner.LearnerName} in {CourseName}"
+        );
+    }
+
+    protected void OnEvaluationCompleted(string message)
+    {
+        EvaluationCompleted?.Invoke(message);
+    }
+
+    // Polymorphism
+    public abstract bool IssueCertificate(int score);
+}
+
+// ================= FREE COURSE =================
+public class FreeCourse : Course
+{
+    public override bool IssueCertificate(int score)
+    {
+        return score >= 50;
+    }
+}
+
+// ================= PAID COURSE =================
+public class PaidCourse : Course
+{
+    public override bool IssueCertificate(int score)
+    {
+        return score >= 70;
+    }
+}
+
+// ================= NOTIFICATION MODULE =================
+public class NotificationService
+{
+    public void Notify(string message)
+    {
+        Console.WriteLine($"[Notification] {message}");
+    }
+}
+
+// ================= MAIN PROGRAM =================
+class Program
+{
+    static void Main()
+    {
+        // Learners
+        Learner learner1 = new Learner(101, "Harsh Sharma");
+        learner1.SetMarks(80);
+
+        Learner learner2 = new Learner(102, "Amit Verma");
+        learner2.SetMarks(60);
+
+        // Courses
+        Course freeCourse = new FreeCourse { CourseName = "C# Fundamentals" };
+        Course paidCourse = new PaidCourse { CourseName = "Advanced .NET" };
+
+        // Notification service
+        NotificationService notifier = new NotificationService();
+
+        // Event subscription
+        freeCourse.EvaluationCompleted += notifier.Notify;
+        paidCourse.EvaluationCompleted += notifier.Notify;
+
+        // Delegates using Lambda expressions
+        EvaluationDelegate quizEvaluation = marks => (int)(marks * 0.70);
+        EvaluationDelegate projectEvaluation = marks => (int)(marks * 0.90);
+
+        Console.WriteLine("========== FREE COURSE EVALUATION ==========");
+        freeCourse.Evaluate(learner1, quizEvaluation);
+
+        Console.WriteLine("\n========== PAID COURSE EVALUATION ==========");
+        paidCourse.Evaluate(learner2, projectEvaluation);
+
+        Console.ReadLine();
+    }
+}
