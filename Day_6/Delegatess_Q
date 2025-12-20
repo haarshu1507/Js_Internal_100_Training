@@ -1,0 +1,103 @@
+using System;
+
+public delegate double DiscountDelegate(double price);
+public delegate void PaymentDelegate(double amount);
+
+
+public class Product
+{
+    public int ProductId { get; set; }
+    public string ProductName { get; set; }
+    public double ProductPrice { get; set; }
+}
+
+
+public class Customer
+{
+    public int CustomerId { get; set; }
+    public string CustomerName { get; set; }
+    public string CustomerType { get; set; } // occasional or regular
+}
+
+public class Shopping
+{
+    public double ApplyDiscount(Product product, DiscountDelegate discountLogic)
+    {
+        double discount = discountLogic(product.ProductPrice);
+        return product.ProductPrice - discount;
+    }
+}
+
+
+public class PaymentGateway
+{
+    public void CreditCardPayment(double amount)
+    {
+        Console.WriteLine($"Payment of ₹{amount} processed via Credit Card.");
+    }
+
+    public void UPIPayment(double amount)
+    {
+        Console.WriteLine($"Payment of ₹{amount} processed via UPI.");
+    }
+
+    public void NetBankingPayment(double amount)
+    {
+        Console.WriteLine($"Payment of ₹{amount} processed via Net Banking.");
+    }
+}
+
+
+class Program
+{
+    static void Main()
+    {
+      
+        Product product = new Product
+        {
+            ProductId = 1,
+            ProductName = "Laptop",
+            ProductPrice = 50000
+        };
+
+        Customer customer = new Customer
+        {
+            CustomerId = 101,
+            CustomerName = "Harsh Sharma",
+            CustomerType = "regular" // change to "occasional" to test
+        };
+
+        Shopping shopping = new Shopping();
+
+        DiscountDelegate festivalDiscount = price => price * 0.17;
+        DiscountDelegate premiumDiscount = price => price * 0.28;
+
+        DiscountDelegate selectedDiscount;
+
+        if (customer.CustomerType.ToLower() == "occasional")
+            selectedDiscount = festivalDiscount;
+        else
+            selectedDiscount = premiumDiscount;
+
+        double finalPrice = shopping.ApplyDiscount(product, selectedDiscount);
+
+        Console.WriteLine("===== SMART ONLINE SHOPPING SYSTEM =====");
+        Console.WriteLine($"Customer Name : {customer.CustomerName}");
+        Console.WriteLine($"Customer Type : {customer.CustomerType}");
+        Console.WriteLine($"Product       : {product.ProductName}");
+        Console.WriteLine($"Original Price: ₹{product.ProductPrice}");
+        Console.WriteLine($"Final Price   : ₹{finalPrice}");
+
+        PaymentGateway gateway = new PaymentGateway();
+
+        PaymentDelegate paymentMethod;
+
+        paymentMethod = gateway.UPIPayment;
+        
+
+        Console.WriteLine("\n===== PAYMENT GATEWAY =====");
+        paymentMethod(finalPrice);
+
+        Console.ReadLine();
+    }
+}
