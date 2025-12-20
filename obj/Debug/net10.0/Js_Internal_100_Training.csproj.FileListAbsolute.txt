@@ -1,0 +1,15 @@
+/workspaces/Js_Internal_100_Training/bin/Debug/net10.0/Js_Internal_100_Training
+/workspaces/Js_Internal_100_Training/bin/Debug/net10.0/Js_Internal_100_Training.deps.json
+/workspaces/Js_Internal_100_Training/bin/Debug/net10.0/Js_Internal_100_Training.runtimeconfig.json
+/workspaces/Js_Internal_100_Training/bin/Debug/net10.0/Js_Internal_100_Training.dll
+/workspaces/Js_Internal_100_Training/bin/Debug/net10.0/Js_Internal_100_Training.pdb
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.AssemblyInfoInputs.cache
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.AssemblyInfo.cs
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.csproj.CoreCompileInputs.cache
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.sourcelink.json
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.dll
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/refint/Js_Internal_100_Training.dll
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.pdb
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/Js_Internal_100_Training.genruntimeconfig.cache
+/workspaces/Js_Internal_100_Training/obj/Debug/net10.0/ref/Js_Internal_100_Training.dll

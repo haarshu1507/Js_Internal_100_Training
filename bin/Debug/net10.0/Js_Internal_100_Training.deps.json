@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Js_Internal_100_Training/1.0.0": {
+        "runtime": {
+          "Js_Internal_100_Training.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Js_Internal_100_Training/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
