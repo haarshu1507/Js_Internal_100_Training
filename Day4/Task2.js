@@ -1,0 +1,9 @@
+<button onclick="changeColor('red')">Red</button>
+<button onclick="changeColor('blue')">Blue</button>
+<button onclick="changeColor('green')">Green</button>
+
+<script>
+function changeColor(color) {
+    document.body.style.backgroundColor = color;
+}
+</script>
